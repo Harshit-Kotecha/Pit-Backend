@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class ResourceError {
     private int status;
     private String message;
-    private Long timestamp;
 }
