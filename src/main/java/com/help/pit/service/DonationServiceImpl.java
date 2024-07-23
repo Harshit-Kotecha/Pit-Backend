@@ -2,6 +2,7 @@ package com.help.pit.service;
 
 import com.help.pit.dao.DonationRepository;
 import com.help.pit.entity.Donation;
+import com.help.pit.rest.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,7 @@ public class DonationServiceImpl implements DonationService {
         if (result.isPresent()) {
             donation = result.get();
         } else {
-            throw new RuntimeException("Donation not found with id" + id);
+            throw new ResourceNotFoundException("Donation not found with id " + id);
         }
         return donation;
     }
