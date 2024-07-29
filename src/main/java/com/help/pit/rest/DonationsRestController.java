@@ -1,11 +1,10 @@
 package com.help.pit.rest;
 
-import com.help.pit.entity.BaseResponse;
-import com.help.pit.entity.Donation;
-import com.help.pit.entity.FailureResponse;
-import com.help.pit.entity.SuccessResponse;
+import com.help.pit.dao.DonationStages;
+import com.help.pit.entity.*;
 import com.help.pit.service.DonationService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class DonationsRestController {
     private DonationService donationService;
 
     @GetMapping("/donations")
-    public BaseResponse<List<Donation>> findAll() {
+    public BaseResponse<List<DonationWithImages>> findAll() {
         return new SuccessResponse<>(donationService.getDonationsWithImages());
     }
 
@@ -37,5 +36,16 @@ public class DonationsRestController {
         final Donation result = donationService.save(donation);
         return new SuccessResponse<>(result);
 
+    }
+
+    @PatchMapping("/donation/update/{id}")
+    public Integer updateDonationStatus(@PathVariable(name = "id") Long id, @RequestParam(name = "status") DonationStages status) {
+        Object a = donationService.updateDonationStatus(status, id);
+        return 2;
+    }
+
+    @GetMapping("/donations/k")
+    public List<Donation> filterByName(@RequestParam(name = "name", required = false) String name) {
+        return donationService.filterByName(name);
     }
 }

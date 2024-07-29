@@ -1,11 +1,11 @@
 package com.help.pit.entity;
 
+import com.help.pit.dao.DonationStages;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Entity
 @Table(name = "donations")
@@ -33,6 +33,7 @@ public class Donation {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "images")
-    private List<String> images;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", columnDefinition = "donation_stages")
+    private DonationStages status;
 }

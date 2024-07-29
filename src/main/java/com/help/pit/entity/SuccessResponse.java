@@ -17,4 +17,8 @@ public class SuccessResponse<T> extends BaseResponse<T> {
     public SuccessResponse(T data) {
         this(data, "Request completed successfully");
     }
+
+    public SuccessResponse() {
+        this(null);
+    }
 }
