@@ -33,6 +33,6 @@ public class Donation {
     @Column(name = "category")
     private String category;
 
-    @Transient
+    @Column(name = "images")
     private List<String> images;
 }

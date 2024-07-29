@@ -13,4 +13,6 @@ public interface DonationService {
 
     void deleteById(Long id);
 
+    List<Donation> getDonationsWithImages();
+
 }

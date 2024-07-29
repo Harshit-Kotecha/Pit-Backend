@@ -44,4 +44,9 @@ public class DonationServiceImpl implements DonationService {
     public void deleteById(Long id) {
         donationRepository.deleteById(id);
     }
+
+    @Override
+    public List<Donation> getDonationsWithImages() {
+        return donationRepository.getDonationsWithImages();
+    }
 }

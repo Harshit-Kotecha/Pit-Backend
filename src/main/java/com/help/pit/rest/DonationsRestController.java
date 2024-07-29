@@ -20,7 +20,7 @@ public class DonationsRestController {
 
     @GetMapping("/donations")
     public BaseResponse<List<Donation>> findAll() {
-        return new SuccessResponse<>(donationService.findAll());
+        return new SuccessResponse<>(donationService.getDonationsWithImages());
     }
 
     @GetMapping("/donations/{id}")
