@@ -1,5 +1,6 @@
 package com.help.pit.rest;
 
+import com.help.pit.dao.DonationStages;
 import com.help.pit.entity.*;
 import com.help.pit.service.DonationService;
 import lombok.AllArgsConstructor;
@@ -38,8 +39,15 @@ public class DonationsRestController {
     }
 
     @PatchMapping("/donation/update/{id}")
-    public Integer updateDonationStatus(@PathVariable(name = "id") Long id, @RequestParam(name = "status") String status) {
-        Object a = donationService.updateDonationStatus(status, id);
-        return 2;
+    public BaseResponse<String> updateDonationStatus(@PathVariable(name = "id") Long id, @RequestParam(name = "status") DonationStages status) {
+
+        // Check whether this user exist or not
+        donationService.findById(id);
+
+        Integer result = donationService.updateDonationStatus(status, id);
+        if(result == 0) {
+            return new FailureResponse<>(400);
+        }
+        return new SuccessResponse<>();
     }
 }

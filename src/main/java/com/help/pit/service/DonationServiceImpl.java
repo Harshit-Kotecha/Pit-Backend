@@ -1,6 +1,7 @@
 package com.help.pit.service;
 
 import com.help.pit.dao.DonationRepository;
+import com.help.pit.dao.DonationStages;
 import com.help.pit.entity.Donation;
 import com.help.pit.rest.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
@@ -47,7 +48,7 @@ public class DonationServiceImpl implements DonationService {
 
     @Transactional
     @Override
-    public Object updateDonationStatus(String status, Long id) {
+    public Integer updateDonationStatus(DonationStages status, Long id) {
         return donationRepository.updateDonationStatus(status, id);
     }
 

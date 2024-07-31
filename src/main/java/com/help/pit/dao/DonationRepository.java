@@ -16,7 +16,7 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE Donation SET status = :status WHERE id = :id")
-    Object updateDonationStatus(@Param("status") String status, @Param("id") Long id);
+    Integer updateDonationStatus(@Param("status") DonationStages status, @Param("id") Long id);
 
     @Query("FROM Donation WHERE name LIKE %:name%")
     List<Donation> findByName(@Param("name") String name);

@@ -6,7 +6,7 @@ public class FailureResponse<T> extends BaseResponse<T> {
 
     public FailureResponse(T data, String message, int statusCode) {
         super.setStatusCode(statusCode);
-        super.setSuccess(true);
+        super.setSuccess(false);
         super.setMessage(message);
         super.setData(data);
     }
