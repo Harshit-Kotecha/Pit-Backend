@@ -3,7 +3,7 @@ package com.help.pit.service;
 import com.help.pit.dao.DonationRepository;
 import com.help.pit.dao.DonationStages;
 import com.help.pit.entity.Donation;
-import com.help.pit.entity.DonationWithImages;
+import com.help.pit.entity.DonationDTO;
 import com.help.pit.rest.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
-    public List<DonationWithImages> getDonationsWithImages() {
+    public List<DonationDTO> getDonationsWithImages() {
         return donationRepository.getDonationsWithImages();
     }
 
@@ -60,5 +60,10 @@ public class DonationServiceImpl implements DonationService {
     @Override
     public List<Donation> filterByName(String name) {
         return donationRepository.findByName(name);
+    }
+
+    @Override
+    public DonationDTO getDonationById(Long id) {
+        return donationRepository.getDonationById(id);
     }
 }

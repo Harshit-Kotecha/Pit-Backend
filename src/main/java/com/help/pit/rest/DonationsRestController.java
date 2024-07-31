@@ -18,13 +18,13 @@ public class DonationsRestController {
     private DonationService donationService;
 
     @GetMapping("/donations")
-    public BaseResponse<List<DonationWithImages>> findAll() {
+    public BaseResponse<List<DonationDTO>> findAll() {
         return new SuccessResponse<>(donationService.getDonationsWithImages());
     }
 
     @GetMapping("/donations/{id}")
-    public BaseResponse<Donation> findById(@PathVariable(name = "id") Long id) {
-        return new SuccessResponse<>(donationService.findById(id));
+    public BaseResponse<DonationDTO> findById(@PathVariable(name = "id") Long id) {
+        return new SuccessResponse<>(donationService.getDonationById(id));
 
     }
 
