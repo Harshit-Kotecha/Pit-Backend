@@ -3,6 +3,7 @@ package com.help.pit.rest;
 import com.help.pit.dao.DonationStages;
 import com.help.pit.entity.*;
 import com.help.pit.service.DonationService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +30,9 @@ public class DonationsRestController {
     }
 
     @PostMapping("/donations")
-    public BaseResponse<Donation> add(@RequestBody Donation donation) {
+    public BaseResponse<Donation> add(@Valid @RequestBody Donation donation) {
         if (donation == null) {
-            throw new RuntimeException("Null data received");
+            throw new ResourceNotFoundException("Request body is mandatory");
         }
         final Donation result = donationService.save(donation);
         return new SuccessResponse<>(result);
