@@ -17,7 +17,7 @@ public class DonationsRestController {
 
     @GetMapping("/donations")
     public BaseResponse<List<Donation>> findAll(@RequestParam(name = "name", required = false) String name) {
-        if(name != null) {
+        if (name != null) {
             return new SuccessResponse<>(donationService.filterByName(name));
         }
         return new SuccessResponse<>(donationService.findAll());
@@ -34,6 +34,7 @@ public class DonationsRestController {
         if (donation == null) {
             throw new ResourceNotFoundException("Request body is mandatory");
         }
+        donation.setStatus(DonationStages.open);
         final Donation result = donationService.save(donation);
         return new SuccessResponse<>(result);
 
@@ -46,9 +47,18 @@ public class DonationsRestController {
         donationService.findById(id);
 
         Integer result = donationService.updateDonationStatus(status, id);
-        if(result == 0) {
+        if (result == 0) {
             return new FailureResponse<>(400);
         }
         return new SuccessResponse<>();
+    }
+
+    @DeleteMapping("/donations/{id}")
+    public BaseResponse<String> deleteById(@PathVariable(name = "id") Long id) {
+        Donation donation = donationService.findById(id);
+
+        donationService.deleteById(id);
+
+        return new SuccessResponse<>("Donation of id " + id + " deleted successfully");
     }
 }
