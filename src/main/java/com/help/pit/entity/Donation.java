@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "donations")
@@ -36,4 +38,7 @@ public class Donation {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", columnDefinition = "donation_stages")
     private DonationStages status;
+
+    @Column(name = "images")
+    private List<String> images;
 }
